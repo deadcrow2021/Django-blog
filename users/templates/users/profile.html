@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="profile">
+    <h2>{{ user.username }}</h2>
+    <p>{{ user.email }}</p>
+    <img src="{{ user.profile.image.url }}">
+    
+    <form class="profile__form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ u_form.as_p }}
+        {{ p_form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+    <div class="post">
+        <p class="title"><a href="{% url 'post-detail' object.id %}">{{ object.title }}</a></p>
+        <div class="row">
+            <div class="element">
+                <div class="content">
+                    <img class="image" src="{{ object.author.profile.image.url }}">
+                </div>
+            </div>
+    
+            <div class="element">
+                <div class="content">
+                    <p class="content">{{ object.content }}</p>
+                </div>
+            </div>
+    
+        </div>
+        <p class="info">by <a href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a> - {{ object.date_posted|date:"d.m.y H:i" }}</p>
+    </div>
+
+    <div class="paginate">
+        {% if object.author == user %}
+            <a href="{% url 'post-update' object.id %}">Update</a>
+            <a href="{% url 'post-delete' object.id %}">Delete</a>
+        {% endif %}
+    </div>
+
+{% endblock %}
